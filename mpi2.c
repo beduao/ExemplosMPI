@@ -16,13 +16,13 @@ int main(void) {
 
    if (my_rank != 0) { 
       /* Criação da mensagem */
-      sprintf(message, "Msg do processo %d of %d!", my_rank, comm_size); 
+      sprintf(message, "Msg do processo %d of %d!", my_rank, comm_size-1); 
       
       /* Envio da mensagem para o processo 0 */
       MPI_Send(message, strlen(message)+1, MPI_CHAR, 0, 0, MPI_COMM_WORLD); 
    } else {  
       /* Impressão da mensagem do processo centralizador */
-      printf("Processo centralizador em execução: %d of %d!\n", my_rank, comm_size);
+      printf("Processo centralizador em execução: %d of %d!\n", my_rank, comm_size-1);
       
       for (int q = 1; q < comm_size; q++) {
          /* Recepção da mensagem do processo q */
